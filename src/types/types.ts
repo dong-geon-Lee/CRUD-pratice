@@ -5,5 +5,6 @@ export interface Itext {
 export interface IProps {
   id: number;
   title: string;
+  user: string;
   completed: boolean;
 }

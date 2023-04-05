@@ -3,6 +3,7 @@ import { items } from "./data/data";
 import { IProps } from "./types/types";
 
 const App = () => {
+  const [todoLists, setTodoLists] = useState(items);
   const [userInfo, setUserInfo] = useState({
     user: "",
     title: "",
@@ -19,9 +20,21 @@ const App = () => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.checked });
   };
 
+  const handleTodoList = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newItems = { id: todoLists.length + 1, user, title, completed };
+    setTodoLists([...todoLists, newItems]);
+    setUserInfo({
+      user: "",
+      title: "",
+      completed: false,
+    });
+  };
+
   return (
     <section>
-      <form>
+      <form onSubmit={handleTodoList}>
         <div>
           <label>유저 이름</label>
           <input
@@ -46,12 +59,14 @@ const App = () => {
             onChange={checkOnchange}
           />
         </div>
+        <button type="submit">제출하기</button>
       </form>
 
-      {items.map((items: IProps) => (
+      {todoLists.map((items: IProps) => (
         <div key={items.id}>
           <h1>{items.id}</h1>
           <h3>{items.title}</h3>
+          <h3>{items.user}</h3>
           <h3>{items.completed ? "완료" : "진행중"}</h3>
         </div>
       ))}
