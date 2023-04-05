@@ -7,4 +7,5 @@ export interface IProps {
   user: string;
   title: string;
   completed: boolean;
+  show: boolean;
 }
