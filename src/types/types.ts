@@ -4,7 +4,7 @@ export interface Itext {
 
 export interface IProps {
   id: number;
-  title: string;
   user: string;
+  title: string;
   completed: boolean;
 }

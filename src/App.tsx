@@ -3,7 +3,7 @@ import { items } from "./data/data";
 import { IProps } from "./types/types";
 
 const App = () => {
-  const [todoLists, setTodoLists] = useState(items);
+  const [todoLists, setTodoLists] = useState<IProps[]>(items);
   const [userInfo, setUserInfo] = useState({
     user: "",
     title: "",
@@ -20,7 +20,7 @@ const App = () => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.checked });
   };
 
-  const handleTodoList = (e: React.FormEvent) => {
+  const handleCreateList = (e: React.FormEvent) => {
     e.preventDefault();
 
     const newItems = { id: todoLists.length + 1, user, title, completed };
@@ -32,9 +32,14 @@ const App = () => {
     });
   };
 
+  const handleDeleteTodo = (itemId: number) => {
+    const newItems = todoLists.filter((todo) => todo.id !== itemId);
+    setTodoLists(newItems);
+  };
+
   return (
     <section>
-      <form onSubmit={handleTodoList}>
+      <form onSubmit={handleCreateList}>
         <div>
           <label>유저 이름</label>
           <input
@@ -61,13 +66,15 @@ const App = () => {
         </div>
         <button type="submit">제출하기</button>
       </form>
-
+      {todoLists.length === 0 && <h1>목록을 추가해주세요!</h1>}
       {todoLists.map((items: IProps) => (
         <div key={items.id}>
           <h1>{items.id}</h1>
-          <h3>{items.title}</h3>
           <h3>{items.user}</h3>
+          <h3>{items.title}</h3>
           <h3>{items.completed ? "완료" : "진행중"}</h3>
+          <button>수정</button>
+          <button onClick={() => handleDeleteTodo(items.id)}>삭제</button>
         </div>
       ))}
     </section>
