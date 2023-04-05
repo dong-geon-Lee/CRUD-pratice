@@ -101,8 +101,12 @@ const App = () => {
           <h3>{item.user}</h3>
           {item.show ? (
             <form onSubmit={(e) => handleUpdateTodo(e, item.id, editTodo)}>
-              <input type="text" onChange={editOnchange} value={editTodo} />
-              <button type="submit">제출</button>
+              <input
+                type="text"
+                onChange={editOnchange}
+                defaultValue={item.title}
+              />
+              <button type="submit" hidden />
             </form>
           ) : (
             <h3>{item.title}</h3>
