@@ -11,7 +11,12 @@ html {
 body {
   font-family: "Courier New", Courier, monospace;
   line-height: 1.5;
-  position: relative;
   background-color: #f3f3f3;
   color: #000;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
